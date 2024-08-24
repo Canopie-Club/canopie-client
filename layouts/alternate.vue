@@ -1,6 +1,5 @@
 <template>
     <div class="template alternate">
-        <div class="user-bar" :class="[user ? 'logged-in' : 'anon']">{{ user?.name }}<span v-if="!user" style="opacity: 0.0;">FISH</span></div>
         <div style="padding: 20px;">
             <div class="nav" style="display: flex; gap: 20px;">
                 <div v-for="route in menuRoutes" :key="route.path">
@@ -14,7 +13,6 @@
 
 <script setup lang="ts">
 const menuRoutes = useMenuRoutes();
-const user = getUser();
 
 </script>
 
