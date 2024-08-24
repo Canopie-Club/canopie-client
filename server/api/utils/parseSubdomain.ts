@@ -1,22 +1,24 @@
 export const parseSubdomain = (url: URL) => {
     // TODO: Extend logic to handle localhost more accurately as 
     // well as client custom domains
-    const host = url.host;
-	let subdomain = host.split('.')[0];
-	let domain = host.split('.')[1];
-
-    if (subdomain === 'www') {
-        subdomain = '';
+    let { hostname } = url;
+    
+    // Handle localhost and its subdomains
+    if (hostname.endsWith('.localhost') || hostname === 'localhost') {
+        // Replace .localhost with .canopie.club
+        hostname = hostname.replace(/\.?localhost$/, '.canopie.club');
     }
 
-    if (/localhost/.test(subdomain)) {
-        subdomain = '';
-        domain = 'canopie.club';
+    const parts = hostname.match(/^(?:([^.]+)\.)?([^.]+\.[^.]+)$/);
+    
+    if (!parts) {
+        // Handle cases like 'example.com' or IP addresses
+
+        throw new Error('Invalid hostname format');
     }
 
-    if (/localhost/.test(domain)) {
-        domain = 'canopie.club';
-    }
+    let [, subdomain = '', domain] = parts;
+    if (subdomain === 'www') subdomain = '';
 
 	return {subdomain, domain};
 };
