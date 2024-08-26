@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-html="page?.formattedContent"></div>
+        <MDC :value="page?.content"></MDC>
     </div>
 </template>
 

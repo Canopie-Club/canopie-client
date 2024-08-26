@@ -1,15 +1,24 @@
 <template>
     <div>
-        <h1>Default Theme</h1>
-        <p>{{ subdomain }}</p>
-        <p>{{ profile }}</p>
+        <MDC :value="page?.content"></MDC>
     </div>
 </template>
 
 <script setup lang="ts">
-const subdomain = useSubdomain()
-const profile = useSiteInfo()
+definePageMeta({
+    layout: 'default'
+})
 
+const site = useSiteInfo()
+const route = useRoute()
+
+const {data: page} = await useFetch('/api/page/info', {
+    method: 'POST',
+    body: {
+        siteId: site.value?.id,
+        path: route.path
+    }
+})
 </script>
 
 <style scoped>

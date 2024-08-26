@@ -1,20 +1,23 @@
 <template>
     <div>
-        <h1>Default Theme</h1>
-        <p>{{ subdomain }}</p>
-        <p>{{ profile }}</p>
-        <p>Path: {{ formattedSlug }}</p>
+        <MDC :value="page?.content"></MDC>
     </div>
 </template>
 
 <script setup lang="ts">
-const subdomain = useSubdomain()
-const profile = useSiteInfo()
-const slug = useRoute().params.path
+definePageMeta({
+    layout: 'default'
+})
 
-const formattedSlug = computed(() => {
-    if (typeof slug === 'string') return `/${slug}`
-    return `/${slug.join('/')}`
+const site = useSiteInfo()
+const route = useRoute()
+
+const {data: page} = await useFetch('/api/page/info', {
+    method: 'POST',
+    body: {
+        siteId: site.value?.id,
+        path: route.path
+    }
 })
 
 </script>

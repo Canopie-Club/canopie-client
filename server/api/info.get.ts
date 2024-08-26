@@ -48,7 +48,7 @@ export default defineEventHandler(async (event) => {
 			const content = md.render(page.content)
 			spaContent += `
 				<div class="spa-page" data-path="${page.path}" id="${page.path}">
-					<h1>${page.title}</h1>
+					<h1 class="spa-title">${page.title}</h1>
 					<div>${content}</div>
 				</div>
 			`
