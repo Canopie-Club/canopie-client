@@ -22,8 +22,6 @@ export const getPageInfo = defineCachedFunction(async (siteId: string, path: str
         testNumber
     }
 }, {
-    maxAge: 60, // 1 hour
-    name: 'getPageInfo',
-    getKey: (siteId: string, path: string) => `${siteId}-${path.replace(/\//g, '-')}`
+    maxAge: 20, // 20 seconds
 })
 
