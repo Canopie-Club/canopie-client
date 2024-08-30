@@ -1,4 +1,4 @@
-export default defineCachedEventHandler(async (event) => {
+export default defineEventHandler(async (event) => {
     const {siteId, path} = await readBody(event)
 
     const page = await getPageInfo(siteId, path)
@@ -11,7 +11,4 @@ export default defineCachedEventHandler(async (event) => {
     })
 
     return page;
-}, {
-    maxAge: 60,
-    name: 'pageInfo'
 })
