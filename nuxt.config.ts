@@ -21,9 +21,9 @@ export default defineNuxtConfig({
       openAPI: true,
       tasks: true
     },
-    scheduledTasks: {
-      "*/1 * * * *": "cron:test",
-    },
+    // scheduledTasks: {
+    //   "*/1 * * * *": "cron:test",
+    // },
   },
 
   // nitro: {
