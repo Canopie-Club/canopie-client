@@ -1,7 +1,4 @@
-import { PrismaClient } from '@canopie-club/prisma-client'
 import markdownIt from 'markdown-it'
-
-const prisma = new PrismaClient()
 
 export default defineEventHandler(async (event) => {
 	const url = getRequestURL(event)
