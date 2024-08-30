@@ -36,7 +36,7 @@ const isActive = (path: string) => {
   padding: 20px;
 
   h1 {
-    @apply text-2xl font-bold text-gray-800 pb-2 mb-4;
+    @apply text-2xl font-bold pb-2 mb-4;
   }
 
   p {
