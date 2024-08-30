@@ -1,5 +1,3 @@
-import MarkdownIt from 'markdown-it'
-
 export default defineEventHandler(async (event) => {
     const {siteId, path} = await readBody(event)
 
@@ -10,11 +8,12 @@ export default defineEventHandler(async (event) => {
         statusMessage: "Page not found"
     })
 
-    const md = new MarkdownIt()
-    const formattedContent = md.render(page.content)
+    // const md = new MarkdownIt()
+    // const formattedContent = md.render(page.content)
+    const testNumber = await cacheTest(path)
 
     return {
         ...page,
-        formattedContent
+        testNumber
     };
 })

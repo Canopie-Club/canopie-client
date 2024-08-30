@@ -21,6 +21,7 @@
     "markdown-it": "^14.1.0",
     "nuxt": "^3.12.4",
     "prisma": "^5.18.0",
+    "uuid": "^10.0.0",
     "vue": "latest"
   },
   "devDependencies": {
@@ -30,6 +31,7 @@
     "@types/bun": "latest",
     "@types/fs-extra": "^11.0.4",
     "@types/markdown-it": "^14.1.2",
+    "@types/uuid": "^10.0.0",
     "drizzle-kit": "^0.24.2",
     "fs-extra": "^11.2.0",
     "sass": "^1.77.8",

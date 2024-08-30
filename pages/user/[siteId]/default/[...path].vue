@@ -1,6 +1,7 @@
 <template>
     <div>
         <MDC :value="page?.content"></MDC>
+        <div>{{ page?.testNumber }}</div>
     </div>
 </template>
 
