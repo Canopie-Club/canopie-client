@@ -11,18 +11,31 @@
   },
   "dependencies": {
     "@canopie-club/prisma-client": "^1.0.0-beta.12",
+    "@nuxt/image": "^1.8.0",
+    "@nuxthub/core": "^0.7.7",
     "@nuxtjs/mdc": "^0.8.3",
     "@nuxtjs/tailwindcss": "^6.12.1",
     "@prisma/client": "^5.18.0",
-    "@types/bun": "latest",
+    "drizzle-orm": "^0.33.0",
+    "emojilib": "^3.0.12",
     "markdown-it": "^14.1.0",
     "nuxt": "^3.12.4",
     "prisma": "^5.18.0",
     "vue": "latest"
   },
   "devDependencies": {
+    "@canopie-club/drizzle": "git+ssh://git@github.com/Canopie-Club/canopie-drizzle.git",
+    "@types/bcrypt": "^5.0.2",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/bun": "latest",
+    "@types/fs-extra": "^11.0.4",
     "@types/markdown-it": "^14.1.2",
-    "sass": "^1.77.8"
+    "drizzle-kit": "^0.24.2",
+    "fs-extra": "^11.2.0",
+    "sass": "^1.77.8",
+    "tsx": "^4.19.0",
+    "unenv": "^1.10.0",
+    "wrangler": "^3.72.2"
   },
   "trustedDependencies": [
     "@canopie-club/prisma-client"
