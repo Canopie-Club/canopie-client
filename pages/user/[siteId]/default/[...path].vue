@@ -1,7 +1,7 @@
 <template>
     <div>
         <MDC :value="page?.content"></MDC>
-        <div>{{ page?.testNumber }}</div>
+        <div class="fixed bottom-4 left-5">{{ page?.testNumber }}</div>
     </div>
 </template>
 
