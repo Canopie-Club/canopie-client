@@ -1,37 +1,29 @@
-import { PrismaClient } from '@canopie-club/prisma-client'
-import { parseSubdomain } from '../api/utils/parseSubdomain'
 import markdownIt from 'markdown-it'
 
-const prisma = new PrismaClient()
-
 export default defineEventHandler(async (event) => {
-    const url = getRequestURL(event)
+	const url = getRequestURL(event)
 
 	// If API Route, ignore.
 	if (/^\/?api/.test(url.pathname)) return;
-
-
 	if (/^\/?login/.test(url.pathname)) return;
+	if (/^\/?_nitro/.test(url.pathname)) return;
 
-    const { subdomain, domain } = parseSubdomain(getRequestURL(event))
+	const { subdomain, domain } = parseSubdomain(getRequestURL(event))
 
-	const routeRecord = await prisma.routeRecord.findFirst({
-		where: { subdomain, domain },
-		include: {
-			site: {
-				include: {
-					pages: {
-						select: {
-							title: true,
-							path: true
-						}
-					}
-				}
-			}
-		},
-	});
 
-	const site = routeRecord?.site;
+	const [routeRecord] = await useDrizzle()
+		.select()
+		.from(tables.routeRecords)
+		.where(
+			and(
+				eq(tables.routeRecords.subdomain, subdomain),
+				eq(tables.routeRecords.domain, domain)
+			)
+		)
+		.limit(1)
+		.leftJoin(tables.sites, eq(tables.sites.id, tables.routeRecords.siteId))
+
+	const site = routeRecord?.sites;
 
 	if (!site) {
 		throw createError({
@@ -40,14 +32,17 @@ export default defineEventHandler(async (event) => {
 		});
 	}
 
-	const pages = routeRecord?.site.pages || []
+	const pages = await useDrizzle().select({
+		title: tables.pages.title,
+		path: tables.pages.path
+	}).from(tables.pages).where(eq(tables.pages.siteId, site.id)).all();
 
-	const page = await prisma.page.findFirst({
-		where: {
-			siteId: site.id,
-			path: url.pathname
-		}
-	})
+	const [page] = await useDrizzle().select().from(tables.pages).where(
+		and(
+			eq(tables.pages.siteId, site.id),
+			eq(tables.pages.path, url.pathname)
+		)
+	).limit(1);
 
 	if (!page) {
 		throw createError({
@@ -58,16 +53,14 @@ export default defineEventHandler(async (event) => {
 
 	if (site.template === 'spa') {
 		const md = new markdownIt()
-		const pages = await prisma.page.findMany({
-			where: {
-				siteId: site.id,
-			},
-			select: {
-				title: true,
-				path: true,
-				content: true
-			}
-		})
+		const pages = await useDrizzle()
+			.select({
+				title: tables.pages.title,
+				path: tables.pages.path,
+				content: tables.pages.content
+			}).
+			from(tables.pages)
+			.where(eq(tables.pages.siteId, site.id));
 
 		let spaContent = '';
 		for (const page of pages) {
@@ -85,8 +78,8 @@ export default defineEventHandler(async (event) => {
 
 	pages.sort((a, b) => a.path.localeCompare(b.path))
 
-    event.context.subdomain = subdomain;
-    event.context.siteInfo = site;
+	event.context.subdomain = subdomain;
+	event.context.siteInfo = site;
 	event.context.pageInfo = page;
 	event.context.menuRoutes = pages;
 })
