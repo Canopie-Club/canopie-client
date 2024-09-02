@@ -1,5 +1,12 @@
 import markdownIt from 'markdown-it'
 
+const logInfo = (title: string, info: { [key: string]: any }) => {
+	console.log(`${title}`)
+	Object.entries(info).forEach(([key, value]) => {
+		console.log(`${key}:`, value)
+	})
+}
+
 export default defineEventHandler(async (event) => {
 	const url = getRequestURL(event)
 
@@ -25,13 +32,13 @@ export default defineEventHandler(async (event) => {
 	const site = routeRecord?.sites;
 
 	if (!site) {
-		console.log("SITE NOT FOUND")
-		console.log('url', url)
-		console.log('subdomain', subdomain)
-		console.log('domain', domain)
-		console.log('routeRecord', routeRecord)
-		console.log('site', site)
-
+		logInfo('SITE NOT FOUND', {
+			url,
+			subdomain,
+			domain,
+			routeRecord,
+			site
+		})
 		throw createError({
 			statusCode: 404,
 			statusMessage: 'Site not found',
@@ -51,6 +58,13 @@ export default defineEventHandler(async (event) => {
 	).limit(1);
 
 	if (!page) {
+		logInfo('PAGE NOT FOUND', {
+			url,
+			subdomain,
+			domain,
+			routeRecord,
+			site
+		})
 		throw createError({
 			statusCode: 404,
 			statusMessage: 'Page Not Found'
