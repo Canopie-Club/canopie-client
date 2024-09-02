@@ -31,14 +31,15 @@ export default defineEventHandler(async (event) => {
 
 	const site = routeRecord?.sites;
 
+	logInfo('ROUTE INFO', {
+		url,
+		subdomain,
+		domain,
+		routeRecord,
+		site
+	})
+
 	if (!site) {
-		logInfo('SITE NOT FOUND', {
-			url,
-			subdomain,
-			domain,
-			routeRecord,
-			site
-		})
 		throw createError({
 			statusCode: 404,
 			statusMessage: 'Site not found',
@@ -58,13 +59,6 @@ export default defineEventHandler(async (event) => {
 	).limit(1);
 
 	if (!page) {
-		logInfo('PAGE NOT FOUND', {
-			url,
-			subdomain,
-			domain,
-			routeRecord,
-			site
-		})
 		throw createError({
 			statusCode: 404,
 			statusMessage: 'Page Not Found'
