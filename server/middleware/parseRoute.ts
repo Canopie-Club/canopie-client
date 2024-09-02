@@ -1,14 +1,11 @@
 import markdownIt from 'markdown-it'
 
-const logInfo = (title: string, info: { [key: string]: any }) => {
-	console.log(`${title}`)
-	Object.entries(info).forEach(([key, value]) => {
-		console.log(`${key}:`, value)
-	})
-}
-
 export default defineEventHandler(async (event) => {
 	const url = getRequestURL(event)
+
+
+	console.log("ROUTE INFO")
+	console.log("url", url.href)
 
 	// If API Route, ignore.
 	if (/^\/?api/.test(url.pathname)) return;
@@ -31,12 +28,12 @@ export default defineEventHandler(async (event) => {
 
 	const site = routeRecord?.sites;
 
-	console.log("ROUTE INFO")
-	console.log("url", url.href)
-	console.log("subdomain", subdomain)
-	console.log("domain", domain)
-	console.log("site", site)
-	console.log("routeRecord", routeRecord)
+	// console.log("ROUTE INFO")
+	// console.log("url", url.href)
+	// console.log("subdomain", subdomain)
+	// console.log("domain", domain)
+	// console.log("site", site)
+	// console.log("routeRecord", routeRecord)
 
 	if (!site) {
 		throw createError({
