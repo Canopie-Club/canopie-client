@@ -10,7 +10,6 @@ export default defineEventHandler(async (event) => {
 
 	const { subdomain, domain } = parseSubdomain(getRequestURL(event))
 
-
 	const [routeRecord] = await useDrizzle()
 		.select()
 		.from(tables.routeRecords)
@@ -26,6 +25,13 @@ export default defineEventHandler(async (event) => {
 	const site = routeRecord?.sites;
 
 	if (!site) {
+		console.log("SITE NOT FOUND")
+		console.log('url', url)
+		console.log('subdomain', subdomain)
+		console.log('domain', domain)
+		console.log('routeRecord', routeRecord)
+		console.log('site', site)
+
 		throw createError({
 			statusCode: 404,
 			statusMessage: 'Site not found',
