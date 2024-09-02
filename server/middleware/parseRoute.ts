@@ -31,13 +31,12 @@ export default defineEventHandler(async (event) => {
 
 	const site = routeRecord?.sites;
 
-	logInfo('ROUTE INFO', {
-		url,
-		subdomain,
-		domain,
-		routeRecord,
-		site
-	})
+	console.log("ROUTE INFO")
+	console.log("url", url.href)
+	console.log("subdomain", subdomain)
+	console.log("domain", domain)
+	console.log("site", site)
+	console.log("routeRecord", routeRecord)
 
 	if (!site) {
 		throw createError({
