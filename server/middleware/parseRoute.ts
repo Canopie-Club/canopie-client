@@ -9,6 +9,7 @@ export default defineEventHandler(async (event) => {
 
 	// If API Route, ignore.
 	if (/^\/?api/.test(url.pathname)) return;
+	if (/^\/?_hub/.test(url.pathname)) return;
 	if (/^\/?login/.test(url.pathname)) return;
 	if (/^\/?_nitro/.test(url.pathname)) return;
 
