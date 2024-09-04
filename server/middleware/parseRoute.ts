@@ -29,6 +29,8 @@ export default defineEventHandler(async (event) => {
 
 	const site = routeRecord?.sites;
 
+	console.log("Made request for sites");
+
 	// console.log("ROUTE INFO")
 	// console.log("url", url.href)
 	// console.log("subdomain", subdomain)
@@ -43,6 +45,8 @@ export default defineEventHandler(async (event) => {
 		});
 	}
 
+	console.log("Site found, requesting pages");
+
 	const pages = await useDrizzle().select({
 		title: tables.pages.title,
 		path: tables.pages.path
@@ -55,12 +59,16 @@ export default defineEventHandler(async (event) => {
 		)
 	).limit(1);
 
+	console.log("Made request for pages");
+
 	if (!page) {
 		throw createError({
 			statusCode: 404,
 			statusMessage: 'Page Not Found'
 		})
 	}
+
+	console.log("Page found, requesting content");
 
 	if (site.template === 'spa') {
 		const md = new markdownIt()
@@ -87,10 +95,16 @@ export default defineEventHandler(async (event) => {
 		event.context.spaContent = spaContent
 	}
 
+	console.log("Spa content found");
+
 	pages.sort((a, b) => a.path.localeCompare(b.path))
+
+	console.log("Pages sorted");
 
 	event.context.subdomain = subdomain;
 	event.context.siteInfo = site;
 	event.context.pageInfo = page;
 	event.context.menuRoutes = pages;
+
+	console.log("Event context set");
 })

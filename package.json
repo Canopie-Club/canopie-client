@@ -35,8 +35,5 @@
     "tsx": "^4.19.0",
     "unenv": "^1.10.0",
     "wrangler": "^3.74.0"
-  },
-  "trustedDependencies": [
-    "@canopie-club/prisma-client"
-  ]
+  }
 }
