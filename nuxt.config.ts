@@ -5,9 +5,9 @@ export default defineNuxtConfig({
   modules: [
     "@nuxtjs/tailwindcss",
     "@nuxtjs/mdc",
-    "@nuxthub/core",
+    // "@nuxthub/core",
     "@canopie-club/toolbox",
-    "@nuxt/image",
+    // "@nuxt/image",
   ],
 
   components: {
