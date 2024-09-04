@@ -5,6 +5,7 @@ export default defineNuxtConfig({
   modules: [
     "@nuxtjs/tailwindcss",
     "@nuxtjs/mdc",
+    "@nuxthub/core",
     "@canopie-club/toolbox",
     "@nuxt/image",
   ],
