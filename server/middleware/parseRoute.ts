@@ -3,15 +3,15 @@ import markdownIt from 'markdown-it'
 export default defineEventHandler(async (event) => {
 	const url = getRequestURL(event)
 
-
-	console.log("ROUTE INFO")
-	console.log("url", url.href)
-
 	// If API Route, ignore.
+	if (/^\/?_/.test(url.pathname)) return;
 	if (/^\/?api/.test(url.pathname)) return;
 	if (/^\/?_hub/.test(url.pathname)) return;
 	if (/^\/?login/.test(url.pathname)) return;
 	if (/^\/?_nitro/.test(url.pathname)) return;
+
+	console.log("ROUTE INFO")
+	console.log("url", url.href)
 
 	const { subdomain, domain } = parseSubdomain(getRequestURL(event))
 

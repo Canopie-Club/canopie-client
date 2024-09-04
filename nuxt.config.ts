@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   modules: [
     "@nuxtjs/tailwindcss",
     "@nuxtjs/mdc",
-    "@nuxthub/core",
+    "@canopie-club/toolbox",
     "@nuxt/image",
   ],
 
@@ -18,7 +18,6 @@ export default defineNuxtConfig({
 
   nitro: {
     experimental: {
-      openAPI: true,
       tasks: true
     },
     // scheduledTasks: {
@@ -33,7 +32,12 @@ export default defineNuxtConfig({
   // },
   
   hub: {
+    // @ts-ignore
     database: true,
+    // database: {
+    //   name: "canopie-portal",
+    //   id: process.env.DB_ID,
+    // },
     cache: true
   },
 })
