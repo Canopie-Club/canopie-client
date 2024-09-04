@@ -1,4 +1,3 @@
-import type { Page } from '~/assets/types/db'
 import type { Profiles } from "~~/utils/types"
 // import type { PageRoute, SiteWithPagePaths } from "~~/utils/site"
 
