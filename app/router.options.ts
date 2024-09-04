@@ -8,7 +8,9 @@ export default {
     //     const subdomain = useSubdomain()
     //     if (ssrContext?.event.context.subdomain) subdomain.value = ssrContext?.event.context.subdomain
     // },
-    routes: (_routes) => {
+    routes: (routes) => {
+        console.log(routes)
+
         const { ssrContext } = useNuxtApp()
         const subdomain = useSubdomain()
         const siteInfo = useSiteInfo()
@@ -16,16 +18,22 @@ export default {
         const menuRoutes = useMenuRoutes()
         const spaContent = useSpaContent()
 
+        console.log("setting context")
+
         if (ssrContext?.event.context.subdomain) subdomain.value = ssrContext?.event.context.subdomain
         if (ssrContext?.event.context.siteInfo) siteInfo.value = ssrContext?.event.context.siteInfo
         if (ssrContext?.event.context.pageInfo) pageInfo.value = ssrContext?.event.context.pageInfo
         if (ssrContext?.event.context.menuRoutes) menuRoutes.value = ssrContext?.event.context.menuRoutes
         if (ssrContext?.event.context.spaContent) spaContent.value = ssrContext?.event.context.spaContent
 
+        console.log("context set")
+
         const template = siteInfo.value?.template || 'default'
 
         if (subdomain.value) {
-            const userRoute = _routes.filter((i) => i.path.includes("/user/:siteId"))
+            console.log("filtering routes")
+
+            const userRoute = routes.filter((i) => i.path.includes("/user/:siteId"))
 
             // if (template === 'spa') {
             //     const userRouteMapped = userRoute.map((i) => ({
@@ -49,10 +57,12 @@ export default {
                 path: newPath,
             }})
 
+            console.log("routes mapped")
+
             // console.log(userRouteMapped)
 
             return userRouteMapped
         }
-        return _routes
+        return routes
     },
 } satisfies RouterConfig
