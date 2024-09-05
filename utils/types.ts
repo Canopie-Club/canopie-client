@@ -1,4 +1,4 @@
 export interface Profiles {
-    id: string /* primary key */;
-    subdomain?: string;
-  }
+  id: string /* primary key */;
+  subdomain?: string;
+}

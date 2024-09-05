@@ -3,10 +3,10 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
   modules: [
-    "@nuxtjs/tailwindcss",
-    "@nuxtjs/mdc",
+    // "@nuxtjs/tailwindcss",
+    // "@nuxtjs/mdc",
     // "@nuxthub/core",
-    "@canopie-club/toolbox",
+    // "@canopie-club/toolbox",
     // "@nuxt/image",
   ],
 
@@ -32,13 +32,13 @@ export default defineNuxtConfig({
   //   }
   // },
   
-  hub: {
-    // @ts-ignore
-    database: true,
-    // database: {
-    //   name: "canopie-portal",
-    //   id: process.env.DB_ID,
-    // },
-    cache: true
-  },
+  // hub: {
+  //   // @ts-ignore
+  //   database: true,
+  //   // database: {
+  //   //   name: "canopie-portal",
+  //   //   id: process.env.DB_ID,
+  //   // },
+  //   cache: true
+  // },
 })

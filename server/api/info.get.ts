@@ -6,55 +6,60 @@ export default defineEventHandler(async (event) => {
 	// If API Route, ignore
 	const { subdomain, domain } = parseSubdomain(getRequestURL(event))
 
-	const [routeRecord] = await useDrizzle()
-		.select()
-		.from(tables.routeRecords)
-		.where(
-			and(
-				eq(tables.routeRecords.subdomain, subdomain),
-				eq(tables.routeRecords.domain, domain)
-			)
-		)
-		.limit(1)
-		.leftJoin(tables.sites, eq(tables.sites.id, tables.routeRecords.siteId))
+	throw createError({
+		statusCode: 404,
+		statusMessage: 'Page not found'
+	})
 
-	const site = routeRecord?.sites;
+	// const [routeRecord] = await useDrizzle()
+	// 	.select()
+	// 	.from(tables.routeRecords)
+	// 	.where(
+	// 		and(
+	// 			eq(tables.routeRecords.subdomain, subdomain),
+	// 			eq(tables.routeRecords.domain, domain)
+	// 		)
+	// 	)
+	// 	.limit(1)
+	// 	.leftJoin(tables.sites, eq(tables.sites.id, tables.routeRecords.siteId))
 
-	if (!site) {
-		throw createError({
-			statusCode: 404,
-			statusMessage: 'Site not found'
-		})
-	}
+	// const site = routeRecord?.sites;
 
-	const pages = await useDrizzle().select().from(tables.pages).where(eq(tables.pages.siteId, site.id)).all();
+	// if (!site) {
+	// 	throw createError({
+	// 		statusCode: 404,
+	// 		statusMessage: 'Site not found'
+	// 	})
+	// }
 
-	let spaContent = '';
+	// const pages = await useDrizzle().select().from(tables.pages).where(eq(tables.pages.siteId, site.id)).all();
 
-	if (site?.template === 'spa') {
-		const md = new markdownIt()
-		const pages = await useDrizzle()
-			.select()
-			.from(tables.pages)
-			.where(eq(tables.pages.siteId, site.id))
-			.all();
+	// let spaContent = '';
 
-		for (const page of pages) {
-			const content = md.render(page.content)
-			spaContent += `
-				<div class="spa-page" data-path="${page.path}" id="${page.path}">
-					<h1 class="spa-title">${page.title}</h1>
-					<div>${content}</div>
-				</div>
-			`
-		}
-	}
+	// if (site?.template === 'spa') {
+	// 	const md = new markdownIt()
+	// 	const pages = await useDrizzle()
+	// 		.select()
+	// 		.from(tables.pages)
+	// 		.where(eq(tables.pages.siteId, site.id))
+	// 		.all();
 
-	return {
-		url,
-		domain,
-		subdomain,
-		site,
-		spaContent
-	}
+	// 	for (const page of pages) {
+	// 		const content = md.render(page.content)
+	// 		spaContent += `
+	// 			<div class="spa-page" data-path="${page.path}" id="${page.path}">
+	// 				<h1 class="spa-title">${page.title}</h1>
+	// 				<div>${content}</div>
+	// 			</div>
+	// 		`
+	// 	}
+	// }
+
+	// return {
+	// 	url,
+	// 	domain,
+	// 	subdomain,
+	// 	site,
+	// 	spaContent
+	// }
 })

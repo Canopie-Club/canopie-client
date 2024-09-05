@@ -13,98 +13,100 @@ export default defineEventHandler(async (event) => {
 	console.log("ROUTE INFO")
 	console.log("url", url.href)
 
-	const { subdomain, domain } = parseSubdomain(getRequestURL(event))
+	return;
 
-	const [routeRecord] = await useDrizzle()
-		.select()
-		.from(tables.routeRecords)
-		.where(
-			and(
-				eq(tables.routeRecords.subdomain, subdomain),
-				eq(tables.routeRecords.domain, domain)
-			)
-		)
-		.limit(1)
-		.leftJoin(tables.sites, eq(tables.sites.id, tables.routeRecords.siteId))
+	// const { subdomain, domain } = parseSubdomain(getRequestURL(event))
 
-	const site = routeRecord?.sites;
+	// const [routeRecord] = await useDrizzle()
+	// 	.select()
+	// 	.from(tables.routeRecords)
+	// 	.where(
+	// 		and(
+	// 			eq(tables.routeRecords.subdomain, subdomain),
+	// 			eq(tables.routeRecords.domain, domain)
+	// 		)
+	// 	)
+	// 	.limit(1)
+	// 	.leftJoin(tables.sites, eq(tables.sites.id, tables.routeRecords.siteId))
 
-	console.log("Made request for sites");
+	// const site = routeRecord?.sites;
 
-	// console.log("ROUTE INFO")
-	// console.log("url", url.href)
-	// console.log("subdomain", subdomain)
-	// console.log("domain", domain)
-	// console.log("site", site)
-	// console.log("routeRecord", routeRecord)
+	// console.log("Made request for sites");
 
-	if (!site) {
-		throw createError({
-			statusCode: 404,
-			statusMessage: 'Site not found',
-		});
-	}
+	// // console.log("ROUTE INFO")
+	// // console.log("url", url.href)
+	// // console.log("subdomain", subdomain)
+	// // console.log("domain", domain)
+	// // console.log("site", site)
+	// // console.log("routeRecord", routeRecord)
 
-	console.log("Site found, requesting pages");
+	// if (!site) {
+	// 	throw createError({
+	// 		statusCode: 404,
+	// 		statusMessage: 'Site not found',
+	// 	});
+	// }
 
-	const pages = await useDrizzle().select({
-		title: tables.pages.title,
-		path: tables.pages.path
-	}).from(tables.pages).where(eq(tables.pages.siteId, site.id)).all();
+	// console.log("Site found, requesting pages");
 
-	const [page] = await useDrizzle().select().from(tables.pages).where(
-		and(
-			eq(tables.pages.siteId, site.id),
-			eq(tables.pages.path, url.pathname)
-		)
-	).limit(1);
+	// const pages = await useDrizzle().select({
+	// 	title: tables.pages.title,
+	// 	path: tables.pages.path
+	// }).from(tables.pages).where(eq(tables.pages.siteId, site.id)).all();
 
-	console.log("Made request for pages");
+	// const [page] = await useDrizzle().select().from(tables.pages).where(
+	// 	and(
+	// 		eq(tables.pages.siteId, site.id),
+	// 		eq(tables.pages.path, url.pathname)
+	// 	)
+	// ).limit(1);
 
-	if (!page) {
-		throw createError({
-			statusCode: 404,
-			statusMessage: 'Page Not Found'
-		})
-	}
+	// console.log("Made request for pages");
 
-	console.log("Page found, requesting content");
+	// if (!page) {
+	// 	throw createError({
+	// 		statusCode: 404,
+	// 		statusMessage: 'Page Not Found'
+	// 	})
+	// }
 
-	if (site.template === 'spa') {
-		const md = new markdownIt()
-		const pages = await useDrizzle()
-			.select({
-				title: tables.pages.title,
-				path: tables.pages.path,
-				content: tables.pages.content
-			}).
-			from(tables.pages)
-			.where(eq(tables.pages.siteId, site.id));
+	// console.log("Page found, requesting content");
 
-		let spaContent = '';
-		for (const page of pages) {
-			const content = md.render(page.content)
-			spaContent += `
-				<div class="spa-page" data-path="${page.path}" id="${page.path}">
-					<h1 class="spa-title">${page.title}</h1>
-					<div>${content}</div>
-				</div>
-			`
-		}
+	// if (site.template === 'spa') {
+	// 	const md = new markdownIt()
+	// 	const pages = await useDrizzle()
+	// 		.select({
+	// 			title: tables.pages.title,
+	// 			path: tables.pages.path,
+	// 			content: tables.pages.content
+	// 		}).
+	// 		from(tables.pages)
+	// 		.where(eq(tables.pages.siteId, site.id));
 
-		event.context.spaContent = spaContent
-	}
+	// 	let spaContent = '';
+	// 	for (const page of pages) {
+	// 		const content = md.render(page.content)
+	// 		spaContent += `
+	// 			<div class="spa-page" data-path="${page.path}" id="${page.path}">
+	// 				<h1 class="spa-title">${page.title}</h1>
+	// 				<div>${content}</div>
+	// 			</div>
+	// 		`
+	// 	}
 
-	console.log("Spa content found");
+	// 	event.context.spaContent = spaContent
+	// }
 
-	pages.sort((a, b) => a.path.localeCompare(b.path))
+	// console.log("Spa content found");
 
-	console.log("Pages sorted");
+	// pages.sort((a, b) => a.path.localeCompare(b.path))
 
-	event.context.subdomain = subdomain;
-	event.context.siteInfo = site;
-	event.context.pageInfo = page;
-	event.context.menuRoutes = pages;
+	// console.log("Pages sorted");
 
-	console.log("Event context set");
+	// event.context.subdomain = subdomain;
+	// event.context.siteInfo = site;
+	// event.context.pageInfo = page;
+	// event.context.menuRoutes = pages;
+
+	// console.log("Event context set");
 })

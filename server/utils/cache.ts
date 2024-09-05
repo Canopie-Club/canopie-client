@@ -19,14 +19,15 @@ export const cacheTest = async (path: string) => {
 // })
 
 export const getPageInfo = async (siteId: string, path: string) => {
-    const [page] = await useDrizzle().select().from(tables.pages).where(and(eq(tables.pages.siteId, siteId), eq(tables.pages.path, path)))
-    if (!page) return null
+    return null
+    // const [page] = await useDrizzle().select().from(tables.pages).where(and(eq(tables.pages.siteId, siteId), eq(tables.pages.path, path)))
+    // if (!page) return null
 
-    const testNumber = nonCachedNumber()
-    return {
-        ...page,
-        testNumber
-    }
+    // const testNumber = nonCachedNumber()
+    // return {
+    //     ...page,
+    //     testNumber
+    // }
 }
 
 // export const getPageInfo = defineCachedFunction(async (siteId: string, path: string) => {

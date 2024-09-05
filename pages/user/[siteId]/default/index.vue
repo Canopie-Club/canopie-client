@@ -1,7 +1,8 @@
 <template>
     <div>
-        <MDC :value="page?.content"></MDC>
-        <div class="fixed bottom-4 left-5">{{ page?.testNumber }}</div>
+        <div>TEST</div>
+        <!-- <MDC :value="page?.content"></MDC>
+        <div class="fixed bottom-4 left-5">{{ page?.testNumber }}</div> -->
     </div>
 </template>
 
