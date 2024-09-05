@@ -10,26 +10,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@canopie-club/toolbox": "github:Canopie-Club/canopie-toolbox",
-    "@nuxt/image": "^1.8.0",
-    "@nuxtjs/mdc": "^0.8.3",
-    "@nuxtjs/tailwindcss": "^6.12.1",
-    "drizzle-orm": "^0.33.0",
-    "emojilib": "^3.0.12",
-    "markdown-it": "^14.1.0",
-    "nuxt": "^3.13.1",
-    "uuid": "^10.0.0",
+    "nuxt": "^3.13.0",
     "vue": "latest"
-  },
-  "devDependencies": {
-    "@types/bun": "latest",
-    "@types/markdown-it": "^14.1.2",
-    "@types/uuid": "^10.0.0",
-    "drizzle-kit": "^0.24.2",
-    "node-emoji": "^2.1.3",
-    "sass": "^1.78.0",
-    "tsx": "^4.19.0",
-    "unenv": "^1.10.0",
-    "wrangler": "^3.74.0"
   }
 }
