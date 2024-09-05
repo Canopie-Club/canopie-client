@@ -1,12 +1,12 @@
 <template>
-    <div>
-        <h1>Hello</h1>
+  <div>
+    <h1>Hello</h1>
 
-        {{ routeInfo }}
-    </div>
+    {{ routeInfo }}
+  </div>
 </template>
 
 <script setup lang="ts">
-const { ssrContext } = useNuxtApp()
-const routeInfo = ssrContext?.routeInfo
+const { ssrContext } = useNuxtApp();
+const routeInfo = ssrContext?.routeInfo;
 </script>

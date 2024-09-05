@@ -1,10 +1,10 @@
-import markdownIt from 'markdown-it'
+// import markdownIt from 'markdown-it'
 
 export default defineEventHandler(async (event) => {
-	const url = getRequestURL(event)
+	// const url = getRequestURL(event)
 
 	// If API Route, ignore
-	const { subdomain, domain } = parseSubdomain(getRequestURL(event))
+	// const { subdomain, domain } = parseSubdomain(getRequestURL(event))
 
 	throw createError({
 		statusCode: 404,

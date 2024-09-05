@@ -1,26 +1,24 @@
 <template>
-    <div>
-        <div v-html="spaContent"></div>
-    </div>
+  <div>
+    <h1>Hello</h1>
+    <!-- <div v-html="spaContent"></div> -->
+  </div>
 </template>
 
 <script setup lang="ts">
 definePageMeta({
-    layout: 'spa'
-})
+  layout: "spa",
+});
 
-const subdomain = useSubdomain()
-const profile = useSiteInfo()
-const slug = useRoute().params.path
-const spaContent = useSpaContent()
+// const subdomain = useSubdomain();
+// const profile = useSiteInfo();
+// const slug = useRoute().params.path;
+// const spaContent = useSpaContent();
 
-const formattedSlug = computed(() => {
-    if (typeof slug === 'string') return `/${slug}`
-    return `/${slug.join('/')}`
-})
-
+// const formattedSlug = computed(() => {
+//   if (typeof slug === "string") return `/${slug}`;
+//   return `/${slug.join("/")}`;
+// });
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

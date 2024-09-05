@@ -1,23 +1,23 @@
 <template>
-    <div>
-        <div>TEST</div>
-        <!-- <MDC :value="page?.content"></MDC> -->
-    </div>
+  <div>
+    <div>TEST</div>
+    <!-- <MDC :value="page?.content"></MDC> -->
+  </div>
 </template>
 
 <script setup lang="ts">
 definePageMeta({
-    layout: 'alternate'
-})
+  layout: "alternate",
+});
 
-const site = useSiteInfo()
-const route = useRoute()
+// const site = useSiteInfo();
+// const route = useRoute();
 
-const {data: page} = await useFetch('/api/page/info', {
-    method: 'POST',
-    body: {
-        siteId: site.value?.id,
-        path: route.path
-    }
-})
+// const { data: page } = await useFetch("/api/page/info", {
+//   method: "POST",
+//   body: {
+//     siteId: site.value?.id,
+//     path: route.path,
+//   },
+// });
 </script>

@@ -10,21 +10,21 @@ export default defineNuxtConfig({
     // "@nuxt/image",
   ],
 
-  components: {
-    global: true,
-    dirs: [
-      '~/components',
-    ]
-  },
+  // components: {
+  //   global: true,
+  //   dirs: [
+  //     '~/components',
+  //   ]
+  // },
 
-  nitro: {
-    experimental: {
-      tasks: true
-    },
-    // scheduledTasks: {
-    //   "*/1 * * * *": "cron:test",
-    // },
-  },
+  // nitro: {
+  //   experimental: {
+  //     tasks: true
+  //   },
+  //   // scheduledTasks: {
+  //   //   "*/1 * * * *": "cron:test",
+  //   // },
+  // },
 
   // nitro: {
   //   experimental: {

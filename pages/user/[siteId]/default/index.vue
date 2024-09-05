@@ -1,28 +1,26 @@
 <template>
-    <div>
-        <div>TEST</div>
-        <!-- <MDC :value="page?.content"></MDC>
+  <div>
+    <div>TEST</div>
+    <!-- <MDC :value="page?.content"></MDC>
         <div class="fixed bottom-4 left-5">{{ page?.testNumber }}</div> -->
-    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
 definePageMeta({
-    layout: 'default'
-})
+  layout: "default",
+});
 
-const site = useSiteInfo()
-const route = useRoute()
+// const site = useSiteInfo();
+// const route = useRoute();
 
-const {data: page} = await useFetch('/api/page/info', {
-    method: 'POST',
-    body: {
-        siteId: site.value?.id,
-        path: route.path
-    }
-})
+// const { data: page } = await useFetch("/api/page/info", {
+//   method: "POST",
+//   body: {
+//     siteId: site.value?.id,
+//     path: route.path,
+//   },
+// });
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
